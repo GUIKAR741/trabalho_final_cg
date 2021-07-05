@@ -39,7 +39,7 @@ void Cena::projecao()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     float largura = 2, altura = largura*h / w;
-    glFrustum(-largura/2,largura/2,-altura/2,altura/2,1,100000);
+    glFrustum(-largura/2,largura/2,-altura/2,altura/2,1,1000000);
 }
 
 void Cena::visualizacao()
@@ -47,7 +47,7 @@ void Cena::visualizacao()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    gluLookAt(50,10,50,
+    gluLookAt(40,4,40,
               0,0,0,
               0,1,0);
 }

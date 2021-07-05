@@ -4,7 +4,6 @@
 #include <QColor>
 #include <QDebug>
 #include <GL/gl.h>
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 
@@ -13,16 +12,20 @@ class Quadrado
 public:
     Quadrado();
     Quadrado(int linha, int coluna);
-    Quadrado* desenha();
+    void desenha();
     Quadrado *quad();
     Quadrado* borda();
     Quadrado* setCor(int r, int g, int b);
-    int getCentroX();
-    int getCentroZ();
+    Quadrado* setLado(float lado);
+    Quadrado* setCentro(float posX, float posZ);
+    float getCentroX();
+    float getCentroZ();
 private:
+    Quadrado* computarVertice();
     QColor cor;
-    int centroX, centroZ;
-    int lado = 4, linha, coluna;
+    glm::vec3 vertices[4];
+    float lado, centroX = 0, centroZ = 0;
+    int linha, coluna;
 };
 
 #endif // QUADRADO_H

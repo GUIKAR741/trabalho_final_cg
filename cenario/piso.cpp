@@ -5,9 +5,12 @@ Piso::Piso()
     for(int i=0;i<tamanhoTabuleiro;i++){
         for(int j=0;j<tamanhoTabuleiro;j++){
             this->tabuleiro[i][j] = Quadrado(i,j);
-            this->tabuleiro[i][j].setCor(255,0,0);
+            this->tabuleiro[i][j].setCor(255,0,0)->setLado(4);
         }
     }
+    cubo.setLado(3);
+    piramide1.setLado(3);
+    piramide2.setLado(3);
 }
 
 void Piso::desenha()
@@ -17,9 +20,7 @@ void Piso::desenha()
             tabuleiro[i][j].desenha();
         }
     }
-//    glColor3f(0,0,1);
-//    glBegin(GL_LINES);
-//        glVertex3d(tabuleiro[tamanhoTabuleiro-1][tamanhoTabuleiro-1].getCentroX(), 0,tabuleiro[tamanhoTabuleiro-1][tamanhoTabuleiro-1].getCentroZ());
-//        glVertex3d(tabuleiro[tamanhoTabuleiro-1][tamanhoTabuleiro-1].getCentroX(), 1,tabuleiro[tamanhoTabuleiro-1][tamanhoTabuleiro-1].getCentroZ());
-//    glEnd();
+    cubo.setPos(tabuleiro[7][7].getCentroX(), tabuleiro[7][7].getCentroZ())->desenha();
+    piramide1.setPos(tabuleiro[0][0].getCentroX(), tabuleiro[0][0].getCentroZ())->desenha();
+    piramide2.setPos(tabuleiro[7][3].getCentroX(), tabuleiro[7][3].getCentroZ())->desenha();
 }

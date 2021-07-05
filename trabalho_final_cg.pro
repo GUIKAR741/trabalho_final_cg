@@ -12,19 +12,23 @@ SOURCES += \
     canvas.cpp \
     cena/cena.cpp \
     cenario/piso.cpp \
+    objetos/cubo.cpp \
     objetos/inimigo.cpp \
     objetos/personagem.cpp \
     main.cpp \
     mainwindow.cpp \
+    objetos/piramide.cpp \
     objetos/quadrado.cpp
 
 HEADERS += \
     canvas.h \
     cena/cena.h \
     cenario/piso.h \
+    objetos/cubo.h \
     objetos/inimigo.h \
     objetos/personagem.h \
     mainwindow.h \
+    objetos/piramide.h \
     objetos/quadrado.h
 
 FORMS += \

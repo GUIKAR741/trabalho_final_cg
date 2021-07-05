@@ -8,11 +8,10 @@ Quadrado::Quadrado(int linha, int coluna)
 {
     this->linha = linha;
     this->coluna = coluna;
-    centroX = lado * linha + lado/2;
-    centroZ = lado * coluna + lado/2;
+    setLado(1);
 }
 
-Quadrado* Quadrado::desenha()
+void Quadrado::desenha()
 {
     glPushMatrix();
     glm::vec3 posicao = glm::vec3(centroX, 0, centroZ);
@@ -21,21 +20,15 @@ Quadrado* Quadrado::desenha()
     glMultMatrixf(glm::value_ptr(modelMatrix));
     quad()->borda();
     glPopMatrix();
-    return this;
 }
 
 Quadrado *Quadrado::quad()
 {
     glColor3f(cor.redF(), cor.greenF(), cor.blueF());
     glBegin(GL_QUADS);
-//        glVertex3f(lado*linha,0,lado*coluna);
-//        glVertex3f(lado*(linha+1),0,lado*coluna);
-//        glVertex3f(lado*(linha+1),0,lado*(coluna+1));
-//        glVertex3f(lado*linha,0,lado*(coluna+1));
-        glVertex3f(lado/2,0,lado/2);
-        glVertex3f(lado/2,0,-lado/2);
-        glVertex3f(-lado/2,0,-lado/2);
-        glVertex3f(-lado/2,0,lado/2);
+        for (int i=0;i<4;i++){
+            glVertex3fv(glm::value_ptr(vertices[i]));
+        }
     glEnd();
     return this;
 }
@@ -45,14 +38,9 @@ Quadrado* Quadrado::borda()
     glColor3f(0,0,0);
     glLineWidth(2);
     glBegin(GL_LINE_LOOP);
-//        glVertex3f(lado*linha,0,lado*coluna);
-//        glVertex3f(lado*(linha+1),0,lado*coluna);
-//        glVertex3f(lado*(linha+1),0,lado*(coluna+1));
-//        glVertex3f(lado*linha,0,lado*(coluna+1));
-        glVertex3f(lado/2,0,lado/2);
-        glVertex3f(lado/2,0,-lado/2);
-        glVertex3f(-lado/2,0,-lado/2);
-        glVertex3f(-lado/2,0,lado/2);
+        for (int i=0;i<4;i++){
+            glVertex3fv(glm::value_ptr(vertices[i]));
+        }
     glEnd();
     glLineWidth(1);
     return this;
@@ -65,12 +53,35 @@ Quadrado* Quadrado::setCor(int r, int g, int b)
     return this;
 }
 
-int Quadrado::getCentroX()
+Quadrado *Quadrado::setLado(float lado)
+{
+    this->lado = lado;
+    setCentro(lado * linha + lado/2, lado * coluna + lado/2)->computarVertice();
+    return this;
+}
+
+Quadrado* Quadrado::setCentro(float centroX, float centroZ)
+{
+    this->centroX = centroX;
+    this->centroZ = centroZ;
+    return this;
+}
+
+float Quadrado::getCentroX()
 {
     return centroX;
 }
 
-int Quadrado::getCentroZ()
+float Quadrado::getCentroZ()
 {
     return centroZ;
+}
+
+Quadrado* Quadrado::computarVertice()
+{
+    vertices[0] = glm::vec3(-lado/2, 0     , -lado/2);
+    vertices[1] = glm::vec3(-lado/2, 0     ,  lado/2);
+    vertices[2] = glm::vec3( lado/2, 0     ,  lado/2);
+    vertices[3] = glm::vec3( lado/2, 0     , -lado/2);
+    return this;
 }
